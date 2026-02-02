@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo Demonstration Report</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            background: #f4f4f4; /* Light grey background for the app view */
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Report Page Style */
+        .report-page {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 30px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Soft shadow */
+            page-break-after: always;
+        }
+
+        /* Image Placeholder Page Style */
+        .image-page {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 30px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            page-break-after: always;
+            min-height: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            margin: 0 0 20px 0;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        .image-header {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-decoration: none;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .placeholder-box {
+            width: 100%;
+            height: 600px;
+            border: 2px dashed #bdc3c7;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #95a5a6;
+            font-size: 18px;
+            font-weight: 500;
+            background-color: #f9f9f9;
+            overflow: hidden;
+        }
+        
+        .placeholder-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Highlighted Section Headers */
+        .section-header {
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            background-color: #e3f2fd; /* Soft Blue */
+            color: #1565c0;
+            padding: 8px 12px;
+            border-left: 4px solid #1565c0;
+            border-radius: 4px;
+            text-transform: uppercase;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate; /* Allows border radius */
+            border-spacing: 0;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border-bottom: 1px solid #eee;
+            padding: 10px 15px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td.label {
+            width: 40%;
+            font-weight: 600;
+            background-color: #f8f9fa;
+            color: #555;
+            border-right: 1px solid #eee;
+        }
+
+        td.value {
+            width: 60%;
+            color: #000;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                font-family: 'Times New Roman', Times, serif; /* Revert to serif for print if preferred, or keep sans */
+            }
+            .report-page, .image-page {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                max-width: none;
+            }
+            
+            .image-page {
+                 height: 100vh;
+            }
+
+            .report-page:last-child, .image-page:last-child {
+                page-break-after: auto;
+            }
+
+            /* Ensure background colors print */
+            td.label, .section-header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            /* Simplify borders for print */
+            table, td {
+                border-color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Report 1 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 1</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Gaurishankar Mehta</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">9546237296</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Sewahi</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Tilouthu</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">15 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">15 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Easy approach</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">13.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">13.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 1 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 1 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="sewahi.jpeg" alt="Field Photo - sewahi.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: sewahi.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 2 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 2</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Ramashish singh</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">7260067830</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Kushdihra</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Tilouthu</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">12 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">12 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Easy approach</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">13.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">13.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 2 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 2 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="kushdihra.jpeg" alt="Field Photo - kushdihra.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: kushdihra.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 3 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 3</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Laxman Yadav</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">7061130710</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Baradih</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Tilouthu</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">8 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">8 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Road side</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">16.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">16.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 3 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 3 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="baradih.jpeg" alt="Field Photo - baradih.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: baradih.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 4 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 4</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Kamkhaya singh</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">9576977403</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Huruka</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Tilouthu</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">15 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">15 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Easy approach</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">18.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">18.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 4 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 4 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="huruka.jpeg" alt="Field Photo - huruka.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: huruka.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 5 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 5</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Yuraj singh</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">7979806590</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Shahpur</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Chenari</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">12 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">12 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Road side</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">19.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">19.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 5 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 5 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="shahpur.jpeg" alt="Field Photo - shahpur.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: shahpur.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 6 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 6</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Premchand Kushwaha</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">7352639780</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Nawadih</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Tilouthu</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">12 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">12 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Easy approach</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">24.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">24.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 6 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 6 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="nawadih.jpeg" alt="Field Photo - nawadih.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: nawadih.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 7 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 7</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Rajesh Kumar</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">8873142253</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Harnachiti</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Tilouthu</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">05 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">05 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Easy approach</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">20.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">20.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 7 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 7 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="harnachiti.jpeg" alt="Field Photo - harnachiti.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: harnachiti.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 8 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 8</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Manjul prakash</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">7457920855</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Rendia</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Chenari</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">10 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">10 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Road side</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">19.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">19.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 8 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 8 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="rendia.jpeg" alt="Field Photo - rendia.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: rendia.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 9 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 9</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Ramawadh Gupta</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">9128983478</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Tenduni</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Chenari</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">07 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">07 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Easy approach</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Wheat Shreeram 303</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">50 kg/acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">19.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">19.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 9 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 9 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="tenduni.jpeg" alt="Field Photo - tenduni.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: tenduni.jpeg'">
+        </div>
+    </div>
+
+    <!-- Report 10 -->
+    <div class="report-page">
+        <h1>COMBO DEMONSTRATION REPORT – 10</h1>
+        <h2>Seed to Harvest</h2>
+        <div class="section-header">Details Of Farmer</div>
+        <table>
+            <tr><td class="label">Name of Farmers</td><td class="value">Prem Yadav</td></tr>
+            <tr><td class="label">Mobile No.</td><td class="value">6203777916</td></tr>
+            <tr><td class="label">Village Name</td><td class="value">Chanka</td></tr>
+            <tr><td class="label">Block & Tehsil</td><td class="value">Nokha</td></tr>
+            <tr><td class="label">District & State</td><td class="value">Rohtash</td></tr>
+        </table>
+        <div class="section-header">Field And Crop Detail</div>
+        <table>
+            <tr><td class="label">Total Acreage(acre)</td><td class="value">8 ACRE</td></tr>
+            <tr><td class="label">Crops Grown</td><td class="value">8 ACRE</td></tr>
+            <tr><td class="label">Field Location (Easy approach/road side)</td><td class="value">Easy approach</td></tr>
+            <tr><td class="label">Selected - Crop & Variety</td><td class="value">Brinjal Navkiran hybrid</td></tr>
+            <tr><td class="label">Trial Plot Area (acre)</td><td class="value">1acre (Including T1+T2+T3)</td></tr>
+            <tr><td class="label">Seed Rate (kg/acre)</td><td class="value">60-80gm per acre</td></tr>
+            <tr><td class="label">Sowing Date</td><td class="value">29.12.2025</td></tr>
+        </table>
+        <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+        <table>
+            <tr><td class="label">Name of Product</td><td class="value">Sulton</td></tr>
+            <tr><td class="label">Application Dose (ml/acre)</td><td class="value">3.33kg (T1 & T2)</td></tr>
+            <tr><td class="label">Date/Time of Application</td><td class="value">29.12.2025</td></tr>
+        </table>
+    </div>
+    <!-- Image Page 10 -->
+    <div class="image-page">
+        <div class="image-header">COMBO DEMONSTRATION REPORT – 10 (PHOTO)</div>
+        <div class="placeholder-box">
+            <img src="chanka.jpeg" alt="Field Photo - chanka.jpeg" onerror="this.style.display='none'; this.parentNode.innerText='Image not found: chanka.jpeg'">
+        </div>
+    </div>
+
+</body>
+</html>

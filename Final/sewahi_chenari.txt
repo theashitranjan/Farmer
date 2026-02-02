@@ -1,0 +1,31 @@
+S N,Farmers Name,Fathers Name,Mobile,Crop,Land in Bigha,Village,Tehsil,District,State
+1,Umesh Chauchani,Rajkumar Chaudhary,7079788127,Paddy,10,Sewahi,Chenari,Rohtas,Bihar
+2,Virbhadra Upadhyay,Krahniya Upadhyay,9525592298,Paddy,9,Sewahi,Chenari,Rohtas,Bihar
+3,Krahniya Upadhyay,Vinod Singh,9113416508,Paddy,16,Sewahi,Chenari,Rohtas,Bihar
+4,Anil Prajapati,Ramgahan Singh,9939330228,Paddy,,Sewahi,Chenari,Rohtas,Bihar
+5,Kameshwar Pratapati,Shankar Singh,9525221227,Paddy,7,Sewahi,Chenari,Rohtas,Bihar
+6,Craya Siticam,Kamlesh Singh,8969806958,Paddy,4,Sewahi,Chenari,Rohtas,Bihar
+7,Mukesh Chaudhary,Kisun Chaudhary,8579999035,Paddy,2,Sewahi,Chenari,Rohtas,Bihar
+8,Jalidesh Chaudhary,Soldeep Chaudhary,9939952974,Paddy,12,Sewahi,Chenari,Rohtas,Bihar
+9,Ranjeet Chaudhary,Taggu Chaudhary,9955377119,Paddy,4,Sewahi,Chenari,Rohtas,Bihar
+10,Parmod Singh,Rajendra Yadav,6205143662,Paddy,16,Sewahi,Chenari,Rohtas,Bihar
+11,Mundrika Chaudhary,Jagadish Chaudhary,9507132422,Paddy,,Sewahi,Chenari,Rohtas,Bihar
+12,Ramnaresh Ram,Mardayam Ram,6202001980,Paddy,2,Sewahi,Chenari,Rohtas,Bihar
+13,Rampurnvesh Singh,Laxmi Singh,9507660103,Paddy,5,Sewahi,Chenari,Rohtas,Bihar
+14,Kameshwar Singh,Surat Singh,8084365992,Paddy,4,Sewahi,Chenari,Rohtas,Bihar
+15,Harendra Singh,Ramkrit Singh,9801806091,Paddy,5,Sewahi,Chenari,Rohtas,Bihar
+16,Satendra Singh,Ramkrit Singh,9608927197,Paddy,4,Sewahi,Chenari,Rohtas,Bihar
+17,Baijnath Singh,Ramkrit Singh,9939818124,Paddy,3,Sewahi,Chenari,Rohtas,Bihar
+18,Rajeshwar Singh,Hiraman Singh,9471875217,Paddy,5,Sewahi,Chenari,Rohtas,Bihar
+19,Ranjeet Dubey,Manku Dubey,9199278613,Paddy,4,Sewahi,Chenari,Rohtas,Bihar
+20,Upendra Singh,Rabunand Singh,7324096675,Paddy,5,Sewahi,Chenari,Rohtas,Bihar
+21,Deependra Singh,Ramkrit Singh,8340280836,Paddy,5,Sewahi,Chenari,Rohtas,Bihar
+22,Saryu Chaudhary,Gopi Chaudhary,9931191791,Paddy,1,Sewahi,Chenari,Rohtas,Bihar
+23,Dharmraj Singh,Der Chaudhary,8084876556,Paddy,2,Sewahi,Chenari,Rohtas,Bihar
+24,Prabhu Dayal Singh,Ramkrit Singh,6204334873,Paddy,,Sewahi,Chenari,Rohtas,Bihar
+25,Birendra Chaudhary,Nama Chaudhary,9472035356,Paddy,2,Sewahi,Chenari,Rohtas,Bihar
+26,Akhireen Chaudhary,Dasai Chaudhary,9199374503,Paddy,3,Sewahi,Chenari,Rohtas,Bihar
+27,Gopal Prasad,Misunder Singh,9772259727,Paddy,4,Sewahi,Chenari,Rohtas,Bihar
+28,Dukhom Singh,Birbal Singh,8102620609,Paddy,1,Sewahi,Chenari,Rohtas,Bihar
+29,Santosh Singh,Bhala Singh,9430436738,Paddy,4,Sewahi,Chenari,Rohtas,Bihar
+30,Ajay Singh,Shankar Singh,9438527822,Paddy,1,Sewahi,Chenari,Rohtas,Bihar

@@ -1,0 +1,31 @@
+S N,Farmers Name,Fathers Name,Mobile,Crop,Land in Bigha,Village,Tehsil,District,State
+1,Sudama Pal,Jimdar Pal,9939177788,Paddy,5 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+2,Vijay Pal,Bhikari Pal,9507898130,Paddy,3 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+3,Gumri Pal,Badam Pal,7742646062,Paddy,2 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+4,Bahadur Shah,Gulabchand Shah,8873371374,Paddy,4 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+5,Anil Ram,Rambachan Ram,997307453,Paddy,3 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+6,Tufani Pal,Bhalu Pal,9661498184,Paddy,3 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+7,Jamwant Singh,,9525707984,Paddy,3 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+8,Dhanjay Pande,Vikrama Pande,8084402283,Paddy,9 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+9,Parsuram Singh,Radheshyam Singh,840959382,Paddy,4 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+10,Ramakant Pande,Vikrama Pande,88733067,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+11,Shashi Kumar,Omprakash Ram,6203288514,Paddy,6 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+12,Amardeep Kumar,Bhumeswar Ram,7903556243,Paddy,5 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+13,Nageswar Shah,Ramsakal Shah,9801254176,Paddy,9 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+14,Haridwar Lal,Sonu Lal,7371838091,Paddy,5 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+15,Shreekrishna Lal,Mahaveer Lal,9955226749,Paddy,4 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+16,Lalam Singh,Ramdev Singh,9608315909,Paddy,3 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+17,Ravi Kumar,Ramendar Singh,9576162017,Paddy,5 Acre,Nawadih,Tilouthu,Rohtas,Bihar
+18,,,,,,,,,
+19,Avadhesh Singh,Jadu Singh,6204696066,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+20,Chari Shankar Lal,Narayan Lal,8102820976,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+21,Kamta Singh,Muni Singh,7352516859,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+22,Dalmia Mishra,Bidyapathi Mishra,7903983694,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+23,Rampravesh Mishra,Sitaram Mishra,8210752271,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+24,Akhileshwar Prasad,Ramsakal Shah,8298597500,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+25,Vijay Pal,Sumesh Pal,9006569604,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+26,Baijnath Shah,Ramsakal Shah,7079970234,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+27,Deepak Mishra,Vindhyachal Mishra,7352976301,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+28,Nitesh Mishra,Shankar Mishra,9304588365,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+29,Bhavesh Prasad Gupta,Mohan Prasad Gupta,7352708292,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar
+30,Devkumar Prajapati,Audhesh Prajapati,7352812920,Paddy,,Nawadih,Tilouthu,Rohtas,Bihar

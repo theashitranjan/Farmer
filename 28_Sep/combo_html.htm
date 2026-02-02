@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolidated Field Day Reports - RMO PATNA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .report-container {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            box-sizing: border-box;
+            overflow: hidden;
+            margin: 2rem auto;
+            background-color: white;
+        }
+        .report-container:last-child {
+            page-break-after: auto;
+        }
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .no-print {
+                display: none;
+            }
+            .report-container {
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100%;
+                height: 100%;
+            }
+             .container{
+                padding: 0.5in !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="max-w-4xl w-full mx-auto">
+        <div class="bg-white p-6 rounded-xl shadow-lg my-8 no-print">
+            <h1 class="text-3xl font-bold text-center text-gray-800">Consolidated Field Show Day Reports</h1>
+            <p class="text-center text-gray-600 mt-2">This document contains individual A4 reports for each farmer, grouped by demo type. Click the button below to print.</p>
+            <div class="text-center mt-6">
+                <button onclick="window.print()" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition duration-300 shadow-md">
+                    Print All Reports
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const farmersData = [
+            // Combo Reports
+            { name: "Muna dube", mobile: "9507023299", village: "Harnachiti", district: "Rohtash", rmo: "Patna", demoType: "Combo", crop: "Paddy", product: "Sulton + Superrhiza + Sulfingold", area: "18 katha", dot: "19.07.2025", dod: "05.08.2025", fsd: "11.09.2025", observations: { Tillers: "14-16", "Shoot length": { demo: "80-85 cms", control: "75-80 cms" }, "Root length": { demo: "13-17 cms", control: "11-14 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Sulton, Superrhiza and Sulfingold suggesting positive impact." },
+            { name: "virbahadur Upadhyay", mobile: "9525592298", village: "sewahi", district: "Rohtash", rmo: "Patna", demoType: "Combo", crop: "Paddy", product: "Sulton + Superrhiza + Sulfingold", area: "0.5 acer", dot: "18.07.2025", dod: "18.07.2025", fsd: "13.09.2025", observations: { Tillers: "20-22", "Shoot length": { demo: "90-95 cms", control: "80-85 cms" }, "Root length": { demo: "18-20 cms", control: "14-16 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Sulton, Superrhiza and Sulfingold suggesting positive impact." },
+            { name: "Mahendra Singh", mobile: "9334615140", village: "chanka", district: "Rohtash", rmo: "Patna", demoType: "Combo", crop: "Paddy", product: "Sulton, Superrhiza, Sulfino Gold", area: "Not specified", dot: "29.07.2025", dod: "Sulton (Basal dose), Superrhiza (08.2025) sulfino Gold (22.09.2025)", fsd: "15.09.2025", observations: { "Root length": { "T1": "30 cm", "T2": "25.4 cm", "T3": "20.34 cm" }, "Plant height": { "T1": "83 cm", "T2": "76 cm", "T3": "88 cm" }, "Panicles": { "T1": "35", "T2": "32", "T3": "22" } }, farmerObservation: "Grain filling (Size of grain) also good in T-1 plot. Clear and visible diffrence in T-1 and T-3 plot in terms of plant growth and T3 plot plants turns yellow but T1 & T2 plot plants are Green." },
+            { name: "Kamlesh Tiwari", mobile: "9223804892", village: "Tenduni", district: "Rohtash", rmo: "Patna", demoType: "Combo", crop: "Paddy", product: "sulton+Superrhiza+sulfinogold", area: "0.5 Ac.", dot: "22.07.2025", dod: "22.07.2025", fsd: "19.09.2025", observations: { "Nos. of tillers": { demo: "30", control: "28" }, "Shoot length": { demo: "100 cm", control: "98 cm" }, "Root length": { demo: "18 cm", control: "16 cm" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Calrich & Superrhiza, suggesting positive impact." },
+            { name: "Narendra singh", mobile: "+919507174853", village: "Huruka", district: "Rohtash", rmo: "Patna", demoType: "Combo", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "24 katha", dot: "15.07.2025", dod: "15.07.2025", fsd: "23.09.2025", observations: { "Nos. of tillers": { demo: "28", control: "18" }, "Shoot length": { demo: "110 cms", control: "105 cms" }, "Root length": { demo: "22 cms", control: "18 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "Gudu singh", mobile: "9608990112", village: "Rendia", district: "Rohtash", rmo: "Patna", demoType: "Combo", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "0.5 acer", dot: "12.07.2025", dod: "22.07.2025", fsd: "25.09.2025", observations: { "Nos. of tillers": { demo: "T1-28,T2-26", control: "22" }, "Shoot length": { demo: "105 cms", control: "103 cms" }, "Root length": { demo: "22 cms", control: "18 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "krishna chaurasiya", mobile: "8789813952", village: "Shahpur", district: "Rohtash", rmo: "Patna", demoType: "Combo", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "0.5 acer", dot: "21.07.2025", dod: "21.07.2025", fsd: "25.09.2025", observations: { "Nos. of tillers": { demo: "26", control: "22" }, "Shoot length": { demo: "96 cms", control: "92 cms" }, "Root length": { demo: "20 cms", control: "17 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            // STRR Reports
+            { name: "Madan Yadav", mobile: "7739142235", village: "Baradih", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "Sulton+Superrhiz+sulfinogold", area: "0.5 Ac.", dot: "05.07.2025", dod: "05.07.2025", fsd: "12.09.2025", observations: { "Nos. of tillers": { demo: "18-20", control: "16-18" }, "Shoot length": { demo: "85-90 cms", control: "80-85 cms" }, "Root length": { demo: "14-16 cms", control: "12-14 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "Umesh Chaudhary", mobile: "7079788127", village: "Sewahi", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "Sulton+Superrhiz+sulfinogold", area: "1 bigha", dot: "18.07.2025", dod: "18.07.2025", fsd: "13.09.2025", observations: { "Nos. of tillers": { demo: "18-20", control: "16-18" }, "Shoot length": { demo: "85-90 cms", control: "80-85 cms" }, "Root length": { demo: "14-16 cms", control: "12-14 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "Satyendra singh", mobile: "+919229927626", village: "Chanka", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "24 katha", dot: "15.07.2025", dod: "15.07.2025", fsd: "15.09.2025", observations: { "Nos. of tillers": { demo: "43", control: "28" }, "Shoot length": { demo: "90 cms", control: "95 cms" }, "Root length": { demo: "28 cms", control: "21 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "vijay pal", mobile: "9006569604", village: "Nawadih", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "0.5 acer", dot: "15.07.2025", dod: "15.07.2025", fsd: "17.09.2025", observations: { "Nos. of tillers": { demo: "26", control: "23" }, "Shoot length": { demo: "92 cms", control: "90 cms" }, "Root length": { demo: "29 cms", control: "26 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "Rana Singh", mobile: "8252154379", village: "Kushdihra", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "sulton+Superrhiza+sulfinogold", area: "0.5 Ac.", dot: "17.07.2025", dod: "17.07.2025", fsd: "18.09.2025", observations: { "Nos. of tillers": { demo: "35", control: "28" }, "Shoot length": { demo: "95 cm", control: "92 cm" }, "Root length": { demo: "23 cm", control: "21 cm" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Calrich & Superrhiza, suggesting positive impact." },
+            { name: "chandeswar Tiwari", mobile: "+919523804892", village: "Tenduni", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "sulton+Superrhiza+sulfinogold", area: "0.5 Ac.", dot: "22.07.2025", dod: "22.07.2025", fsd: "19.09.2025", observations: { "Nos. of tillers": { demo: "32", control: "26" }, "Shoot length": { demo: "102 cm", control: "100 cm" }, "Root length": { demo: "28 cm", control: "23 cm" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Calrich & Superrhiza, suggesting positive impact." },
+            { name: "Ramayan singh", mobile: "9931154501", village: "Rendia", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "0.5 acer", dot: "21.07.2025", dod: "21.07.2025", fsd: "19.09.2025", observations: { "Nos. of tillers": { demo: "23", control: "20" }, "Shoot length": { demo: "105 cms", control: "98 cms" }, "Root length": { demo: "22 cms", control: "21 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "Surendar Dube", mobile: "9060749737", village: "Harnachiti", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "24 katha", dot: "15.07.2025", dod: "15.07.2025", fsd: "20.09.2025", observations: { "Nos. of tillers": { demo: "42", control: "18" }, "Shoot length": { demo: "105 cms", control: "100 cms" }, "Root length": { demo: "30 cms", control: "23 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "Madan prasad", mobile: "7255868062", village: "Shahpur", district: "Rohtash", rmo: "Patna", demoType: "STRR", crop: "Paddy", product: "Sulton+Superrhiza+sulfinogold", area: "0.5 acre", dot: "21.07.2025", dod: "21.07.2025", fsd: "25.09.2025", observations: { "Nos. of tillers": { demo: "36", control: "28" }, "Shoot length": { demo: "106 cms", control: "104 cms" }, "Root length": { demo: "22 cms", control: "20 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            // SN Spot Reports
+            { name: "vinod Upadhyay", mobile: "+918252316459", village: "Sewahi", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiza 2kg", area: "0.5 Ac.", dot: "25.07.2025", dod: "11.08.2025", fsd: "11.09.2025", observations: { Tillers: "14-16", "Shoot length": { demo: "80-85 cms", control: "75-80 cms" }, "Root length": { demo: "12-14 cms", control: "10-12 cm" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Sulton, suggesting positive impact." },
+            { name: "Jhapsi Yadav", mobile: "+918757299933", village: "Baradih", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiz-2kg", area: "0.5 Ac.", dot: "15.07.2025", dod: "05.08.2025", fsd: "12.09.2025", observations: { "Nos. of tillers": { demo: "16-18", control: "14-16" }, "Shoot length": { demo: "80-85 cms", control: "75-80 cms" }, "Root length": { demo: "10-13 cms", control: "09-12 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Superrhiza, suggesting positive impact." },
+            { name: "Mahaveer Yadav", mobile: "6203656058", village: "Harnachiti", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiz-2kg", area: "0.5 Ac.", dot: "19.07.2025", dod: "05.08.2025", fsd: "12.09.2025", observations: { "Nos. of tillers": { demo: "17-19", control: "13-15" }, "Shoot length": { demo: "82-85 cms", control: "77-80 cms" }, "Root length": { demo: "13-14 cms", control: "11-13 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Superrhiza, suggesting positive impact." },
+            { name: "kalika prasad", mobile: "9631645827", village: "Nawadih", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiz-2kg", area: "0.5 Ac.", dot: "15.07.2025", dod: "05.08.2025", fsd: "17.09.2025", observations: { "Nos. of tillers": { demo: "32", control: "24" }, "Shoot length": { demo: "90 cms", control: "88 cms" }, "Root length": { demo: "28 cms", control: "18 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Superrhiza, suggesting positive impact." },
+            { name: "kapil Mishra", mobile: "8682045928", village: "kushdihra", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiza - 2 kg", area: "0.5 Ac.", dot: "16.07.2025", dod: "11.08.2025", fsd: "19.09.2025", observations: { "Nos. of tillers": { demo: "37", control: "27" }, "Shoot length": { demo: "90 cm", control: "88 cm" }, "Root length": { demo: "25 cm", control: "23 cm" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Calrich & Superrhiza, suggesting positive impact." },
+            { name: "Triloki kumar", mobile: "6209365008", village: "Tenduni", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiza", area: "0.5 acre", dot: "13.07.2025", dod: "13.08.2025", fsd: "24.09.2025", observations: { "Nos. of tillers": { demo: "27", control: "17" }, "Shoot length": { demo: "110 cms", control: "105 cms" }, "Root length": { demo: "30 cms", control: "24 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "sonu singh", mobile: "7903752230", village: "Rendia", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiza", area: "0.5 acre", dot: "07.07.2025", dod: "07.08.2025", fsd: "25.09.2025", observations: { "Nos. of tillers": { demo: "32", control: "28" }, "Shoot length": { demo: "105 cms", control: "102 cms" }, "Root length": { demo: "22 cms", control: "20 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "vedprakash singh", mobile: "9771310742", village: "Chanka", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiza", area: "0.5 acre", dot: "12.07.2025", dod: "12.08.2025", fsd: "25.09.2025", observations: { "Nos. of tillers": { demo: "42", control: "35" }, "Shoot length": { demo: "100 cms", control: "98 cms" }, "Root length": { demo: "28 cms", control: "26 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "sunil shah", mobile: "8084066341", village: "Shahpur", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiza", area: "0.5 acre", dot: "21.07.2025", dod: "21.08.2025", fsd: "25.09.2025", observations: { "Nos. of tillers": { demo: "25", control: "18" }, "Shoot length": { demo: "104 cms", control: "102 cms" }, "Root length": { demo: "20 cms", control: "18 cms" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttamsulton+Superrhiza,+sulfino gold suggesting positive impact." },
+            { name: "Jitendra Singh", mobile: "9534796136", village: "Huruka", district: "Rohtash", rmo: "Patna", demoType: "SN Spot", crop: "Paddy", product: "Superrhiza - 2 kg", area: "0.5 Ac.", dot: "14.07.2025", dod: "11.08.2025", fsd: "18.09.2025", observations: { "Nos. of tillers": { demo: "37", control: "27" }, "Shoot length": { demo: "90 cm", control: "88 cm" }, "Root length": { demo: "25 cm", control: "23 cm" } }, farmerObservation: "Farmer observed increased plant growth, development and stem thickness and root volume and overall plant health after use of Uttam Calrich & Superrhiza, suggesting positive impact." }
+        ];
+
+        function createReport(farmer, index, total) {
+            const container = document.createElement('div');
+            container.className = 'report-container bg-white shadow-lg';
+
+            const observationsHtml = (obs) => {
+                if (obs['Panicles']) { // Special case for Mahendra Singh
+                     return `
+                        <table class="w-full text-sm text-left text-gray-500 mt-2">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2">Parameter</th>
+                                    <th scope="col" class="px-4 py-2">T1 (Demo)</th>
+                                    <th scope="col" class="px-4 py-2">T2 (Control)</th>
+                                    <th scope="col" class="px-4 py-2">T3 (Control)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b"><td class="px-4 py-2 font-medium">Root Length</td><td class="px-4 py-2">${obs['Root length'].T1}</td><td class="px-4 py-2">${obs['Root length'].T2}</td><td class="px-4 py-2">${obs['Root length'].T3}</td></tr>
+                                <tr class="bg-gray-50 border-b"><td class="px-4 py-2 font-medium">Plant Height</td><td class="px-4 py-2">${obs['Plant height'].T1}</td><td class="px-4 py-2">${obs['Plant height'].T2}</td><td class="px-4 py-2">${obs['Plant height'].T3}</td></tr>
+                                <tr class="bg-white border-b"><td class="px-4 py-2 font-medium">Panicles</td><td class="px-4 py-2">${obs.Panicles.T1}</td><td class="px-4 py-2">${obs.Panicles.T2}</td><td class="px-4 py-2">${obs.Panicles.T3}</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                }
+                
+                let tableRows = '';
+                for (const key in obs) {
+                    if (typeof obs[key] === 'object') {
+                        tableRows += `
+                            <tr class="bg-white border-b">
+                                <td class="px-4 py-2 font-medium">${key}</td>
+                                <td class="px-4 py-2">${obs[key].demo || 'N/A'}</td>
+                                <td class="px-4 py-2">${obs[key].control || 'N/A'}</td>
+                            </tr>`;
+                    } else {
+                         tableRows += `
+                            <tr class="bg-white border-b">
+                                <td class="px-4 py-2 font-medium">${key}</td>
+                                <td class="px-4 py-2">${obs[key]}</td>
+                                <td class="px-4 py-2">N/A</td>
+                            </tr>`;
+                    }
+                }
+
+                return `
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-4 py-2">Parameter</th>
+                                <th scope="col" class="px-4 py-2">Demo Plot</th>
+                                <th scope="col" class="px-4 py-2">Control Plot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           ${tableRows}
+                        </tbody>
+                    </table>`;
+            };
+            
+            const imageUrl = `${farmer.village.toLowerCase().replace(/\s+/g, "")}_${farmer.demoType.toLowerCase().replace(/\s+/g, "")}.jpg`;
+
+            container.innerHTML = `
+                <div class="container p-8 h-full flex flex-col">
+                    <header class="text-center mb-4">
+                        <h2 class="text-xs font-semibold text-gray-500 tracking-wider uppercase">Field Day under S2H (Report ${index + 1}/${total})</h2>
+                        <h1 class="text-2xl font-bold text-gray-800">🌱 ${farmer.demoType} Report 🌱</h1>
+                        <p class="text-md text-gray-500">RMO: ${farmer.rmo}</p>
+                    </header>
+                    <div class="flex-grow border-t border-gray-200 pt-4">
+                        <div class="grid grid-cols-2 gap-x-6">
+                            <div>
+                               <h3 class="text-lg font-bold text-gray-700 mb-2 border-b pb-1">Farmer Details</h3>
+                                <ul class="text-sm space-y-1 text-gray-600">
+                                    <li><span class="font-semibold w-20 inline-block">Name:</span> ${farmer.name}</li>
+                                    <li><span class="font-semibold w-20 inline-block">Village:</span> ${farmer.village}</li>
+                                    <li><span class="font-semibold w-20 inline-block">District:</span> ${farmer.district}</li>
+                                    <li><span class="font-semibold w-20 inline-block">Mobile:</span> ${farmer.mobile}</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-700 mb-2 border-b pb-1">Demo Basics</h3>
+                                <ul class="text-sm space-y-1 text-gray-600">
+                                    <li><span class="font-semibold w-28 inline-block">Crop:</span> ${farmer.crop}</li>
+                                    <li><span class="font-semibold w-28 inline-block">Demo Type:</span> ${farmer.demoType}</li>
+                                    <li><span class="font-semibold w-28 inline-block">Product Used:</span> ${farmer.product}</li>
+                                    <li><span class="font-semibold w-28 inline-block">Area:</span> ${farmer.area}</li>
+                                    <li><span class="font-semibold w-28 inline-block">DOT:</span> ${farmer.dot}</li>
+                                     <li><span class="font-semibold w-28 inline-block">Demonstration:</span> ${farmer.dod}</li>
+                                    <li><span class="font-semibold w-28 inline-block">FSD Date:</span> ${farmer.fsd}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-gray-700 mt-4 mb-2 border-b pb-1">Observations</h3>
+                        ${observationsHtml(farmer.observations)}
+
+                        <h3 class="text-lg font-bold text-gray-700 mt-4 mb-2 border-b pb-1">Farmer's Observation</h3>
+                        <blockquote class="mt-2 p-4 bg-green-50 border-l-4 border-green-400 text-green-800 text-sm">
+                           "${farmer.farmerObservation}"
+                        </blockquote>
+                    </div>
+                    <div class="mt-auto pt-4">
+                         <div class="relative w-full overflow-hidden rounded-lg shadow-md" style="padding-top: 45%;">
+                            <img src="${imageUrl}" alt="Field Show Day Photo at ${farmer.village}" class="absolute top-0 left-0 w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(container);
+        }
+
+        window.onload = () => {
+            farmersData.forEach((farmer, index) => {
+                createReport(farmer, index, farmersData.length);
+            });
+        };
+    </script>
+</body>
+</html>
+
+
