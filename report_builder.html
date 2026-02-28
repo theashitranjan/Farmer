@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Demonstration Report</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            background: #eef2f5;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        /* Control Bar (Hidden when printing) */
+        .control-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .control-title {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-print {
+            background-color: #3498db;
+            color: white;
+        }
+        .btn-print:hover { background-color: #2980b9; }
+
+        .btn-add {
+            background-color: #27ae60;
+            color: white;
+        }
+        .btn-add:hover { background-color: #219150; }
+
+        /* Report Container */
+        .report-container {
+            margin-top: 60px; /* Space for control bar */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Page Styles */
+        .page {
+            width: 210mm; /* A4 Width */
+            min-height: 297mm; /* A4 Height */
+            padding: 20mm;
+            box-sizing: border-box;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* Editable Fields */
+        [contenteditable="true"] {
+            padding: 2px 5px;
+            border-bottom: 1px dashed #ccc;
+            min-width: 50px;
+            display: inline-block;
+            transition: border 0.2s, background 0.2s;
+            color: #000;
+        }
+
+        [contenteditable="true"]:hover {
+            background-color: #fcf8e3;
+            border-bottom: 1px dashed #f39c12;
+            cursor: text;
+        }
+
+        [contenteditable="true"]:focus {
+            outline: none;
+            background-color: #fff8c4;
+            border-bottom: 1px solid #f39c12;
+        }
+        
+        /* Headers */
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            margin: 0 0 20px 0;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        .section-header {
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 8px 12px;
+            border-left: 4px solid #1565c0;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border-bottom: 1px solid #eee;
+            padding: 10px 15px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        td.label {
+            width: 40%;
+            font-weight: 600;
+            background-color: #f8f9fa;
+            color: #555;
+            border-right: 1px solid #eee;
+        }
+
+        td.value {
+            width: 60%;
+            color: #000;
+            padding-left: 10px;
+        }
+
+        /* Image Upload Area */
+        .image-page-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .image-header {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-decoration: none;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .upload-zone {
+            width: 100%;
+            height: 600px;
+            border: 3px dashed #bdc3c7;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .upload-zone:hover {
+            border-color: #3498db;
+            background-color: #ecf0f1;
+        }
+
+        .upload-zone img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none; /* Hidden by default until loaded */
+        }
+
+        .upload-instruction {
+            color: #95a5a6;
+            font-size: 18px;
+            font-weight: 500;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .upload-instruction span {
+            display: block;
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #bdc3c7;
+        }
+
+        /* Print Styles */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .control-bar { display: none !important; }
+            .report-container { 
+                margin-top: 0; 
+                display: block; /* Disable flex in print to prevent flow issues */
+            }
+            
+            .page {
+                box-shadow: none;
+                margin: 0;
+                border: none;
+                width: 210mm;
+                height: 297mm; /* Force precise A4 height */
+                padding: 15mm; /* Slightly reduce padding for safety */
+                page-break-after: always; /* Force break after every .page div */
+                page-break-inside: avoid; /* Prevent breaking inside the div */
+                overflow: hidden; /* Prevent spillover */
+                float: none;
+            }
+
+            .page:last-child { 
+                page-break-after: auto; 
+            }
+
+            /* Remove edit cues */
+            [contenteditable="true"] {
+                border-bottom: none;
+                padding: 0;
+            }
+            
+            .upload-zone {
+                border: 1px solid #eee; /* Subtle border for print */
+                background: none;
+                height: 230mm; /* Adjust height for print layout */
+            }
+
+            /* Hide instruction text if image is present */
+            .upload-zone.has-image .upload-instruction {
+                display: none !important;
+            }
+
+            .upload-zone:not(.has-image) .upload-instruction {
+                opacity: 0; 
+            }
+            
+            /* Ensure colors print */
+            td.label, .section-header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="control-bar">
+        <div class="control-title">?? Report Builder <p>Desigened and Developed by <a href="https://theashitranjan.github.io">The Sparrow webapps</a></p></div>
+        <div>
+            <button class="btn btn-add" onclick="addNewReport()">? Add New Report Section</button>
+            <button class="btn btn-print" onclick="window.print()">??? Print to PDF</button>
+        </div>
+    </div>
+
+    <div class="report-container" id="mainContainer">
+        <!-- Template Block (Report + Image Page) -->
+        <div class="report-block">
+            <!-- Page 1: Text Data -->
+            <div class="page">
+                <h1 contenteditable="true">STRR DEMONSTRATION REPORT - 1</h1>
+                <h2>Seed to Harvest</h2>
+                
+                <div class="section-header">Details Of Farmer</div>
+                <table>
+                    <tr><td class="label">Name of Farmers</td><td class="value" contenteditable="true">Enter Name Here</td></tr>
+                    <tr><td class="label">Mobile No.</td><td class="value" contenteditable="true">Enter Mobile No</td></tr>
+                    <tr><td class="label">Village Name</td><td class="value" contenteditable="true">Enter Village</td></tr>
+                    <tr><td class="label">Block & Tehsil</td><td class="value" contenteditable="true">Tilouthu</td></tr>
+                    <tr><td class="label">District & State</td><td class="value" contenteditable="true">Rohtash</td></tr>
+                </table>
+
+                <div class="section-header">Field And Crop Detail</div>
+                <table>
+                    <tr><td class="label">Total Acreage(acre)</td><td class="value" contenteditable="true">XX ACRE</td></tr>
+                    <tr><td class="label">Crops Grown</td><td class="value" contenteditable="true">XX ACRE</td></tr>
+                    <tr><td class="label">Field Location</td><td class="value" contenteditable="true">Easy approach / Road side</td></tr>
+                    <tr><td class="label">Selected - Crop & Variety</td><td class="value" contenteditable="true">Wheat</td></tr>
+                    <tr><td class="label">Trial Plot Area (acre)</td><td class="value" contenteditable="true">1acre (Including T1+T2)</td></tr>
+                    <tr><td class="label">Seed Rate (kg/acre)</td><td class="value" contenteditable="true">50 kg/acre</td></tr>
+                    <tr><td class="label">Sowing Date</td><td class="value" contenteditable="true">DD.MM.YYYY</td></tr>
+                </table>
+
+                <div class="section-header">Demo Product Name And Dose & Field day detail</div>
+                <table>
+                    <tr><td class="label">Name of Product</td><td class="value" contenteditable="true">Whemo 755 / Sulfinogold</td></tr>
+                    <tr><td class="label">Application Dose (ml/acre)</td><td class="value" contenteditable="true">8gm / 1.5kg</td></tr>
+                    <tr><td class="label">Date/Time of Application</td><td class="value" contenteditable="true">DD.MM.YYYY</td></tr>
+                </table>
+            </div>
+
+            <!-- Page 2: Image -->
+            <div class="page">
+                <div class="image-page-content">
+                    <div class="image-header" contenteditable="true">STRR DEMONSTRATION REPORT - 1 (PHOTO)</div>
+                    
+                    <!-- File Input hidden -->
+                    <input type="file" accept="image/*" class="file-input" style="display: none;" onchange="loadImage(this)">
+                    
+                    <!-- Upload Zone -->
+                    <div class="upload-zone" onclick="triggerUpload(this)">
+                        <div class="upload-instruction">
+                            <span>??</span>
+                            Click to Upload Photo
+                        </div>
+                        <img src="" alt="Report Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to trigger the hidden file input
+        function triggerUpload(zone) {
+            const fileInput = zone.parentElement.querySelector('.file-input');
+            fileInput.click();
+        }
+
+        // Function to load the image and display it
+        function loadImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                const uploadZone = input.parentElement.querySelector('.upload-zone');
+                const img = uploadZone.querySelector('img');
+                const instruction = uploadZone.querySelector('.upload-instruction');
+
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    instruction.style.display = 'none';
+                    uploadZone.classList.add('has-image');
+                    uploadZone.style.borderStyle = 'solid'; // Solid border when image exists
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Function to clone the report block to add a new section
+        function addNewReport() {
+            const container = document.getElementById('mainContainer');
+            const template = container.querySelector('.report-block');
+            const clone = template.cloneNode(true);
+
+            // Clear inputs in the clone
+            const editables = clone.querySelectorAll('[contenteditable="true"]');
+            
+            // Optional: Auto-increment report number
+            const currentCount = document.querySelectorAll('.report-block').length + 1;
+            
+            editables.forEach(el => {
+                // If it's a title, update number
+                if(el.innerText.includes('REPORT -')) {
+                    el.innerText = el.innerText.replace(/REPORT - \d+/, 'REPORT - ' + currentCount);
+                }
+            });
+
+            // Reset Image
+            const img = clone.querySelector('img');
+            img.src = "";
+            img.style.display = 'none';
+            const instruction = clone.querySelector('.upload-instruction');
+            instruction.style.display = 'block';
+            const zone = clone.querySelector('.upload-zone');
+            zone.classList.remove('has-image');
+            zone.style.borderStyle = 'dashed';
+            
+            // Re-attach event listeners (inline onchange works, but cleaner to verify)
+            const fileInput = clone.querySelector('.file-input');
+            fileInput.value = ""; // Clear file selection
+
+            container.appendChild(clone);
+            
+            // Scroll to new section
+            clone.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

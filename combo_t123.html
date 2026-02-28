@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo_T123_Reports</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Styling for editable elements */
+        .editable {
+            padding: 2px 4px;
+            margin: -2px -4px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            outline: none;
+            display: inline-block;
+            min-width: 20px;
+        }
+
+        .editable-block {
+            padding: 8px;
+            margin: -8px;
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        /* Hover and focus states for on-screen editing */
+        @media screen {
+            .editable:hover { background-color: #e5e7eb; cursor: text; }
+            .editable:focus { background-color: #fff; box-shadow: 0 0 0 2px #3b82f6; }
+            
+            .editable-block:hover { background-color: #f9fafb; border: 1px dashed #cbd5e1; cursor: text; }
+            .editable-block:focus { background-color: #fff; border: 1px solid #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+            
+            .image-upload-area { border: 2px dashed #9ca3af; }
+            .image-upload-area:hover { border-color: #3b82f6; background-color: #f0fdf4; }
+        }
+
+        /* Specific styles for printing to A4 */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0 !important;
+            }
+            body {
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none !important;
+            }
+            #reports-container {
+                display: block !important;
+            }
+            .report-page {
+                width: 210mm !important;
+                height: 297mm !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 15mm 20mm !important;
+                box-sizing: border-box !important;
+                box-shadow: none !important;
+                border: none !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+                break-after: page; 
+                break-inside: avoid;
+                overflow: hidden;
+                float: none !important;
+            }
+            .report-page:last-child {
+                break-after: auto;
+                page-break-after: auto;
+            }
+            .editable, .editable-block {
+                background-color: transparent !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .image-upload-area {
+                border: none !important;
+            }
+            .banner-container {
+                height: 80mm !important;
+            }
+        }
+    </style>
+</head>
+<body class="py-6 sm:py-8 pb-32 sm:pb-8 print:py-0 text-gray-800">
+
+    <!-- Container for all report pages -->
+    <div id="reports-container" class="flex flex-col gap-8 px-2 sm:px-4 print:px-0">
+        
+        <!-- A4 Paper Container (Template Page) -->
+        <div class="report-page w-full max-w-[800px] print:max-w-none print:w-[210mm] print:h-[297mm] min-h-[297mm] mx-auto bg-white shadow-lg print:shadow-none p-5 sm:p-8 print:px-[20mm] print:py-[15mm] relative box-border flex flex-col">
+            
+            <!-- Delete Page Button -->
+            <button onclick="removeReportPage(this)" class="delete-page-btn hidden no-print absolute top-3 right-3 sm:top-5 sm:right-5 text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-2 rounded-full transition-colors z-10" title="Remove this report">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </button>
+
+            <!-- Header Section -->
+            <div class="mb-5 print:mb-5 text-center sm:text-left flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-gray-200 pb-4 print:pb-3">
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1 uppercase tracking-wide">
+                        <span class="editable" contenteditable="true">FIELD DAY UNDER S2H</span> 
+                        (<span class="editable report-number text-blue-700" contenteditable="true">REPORT 3/26</span>)
+                    </h1>
+                    <h2 class="text-lg font-semibold text-gray-600">
+                        <span class="editable" contenteditable="true">Combo Report</span>
+                    </h2>
+                </div>
+                <div class="mt-2 sm:mt-0 text-lg font-bold text-gray-800">
+                    RMO: <span class="editable text-blue-700" contenteditable="true">Patna</span>
+                </div>
+            </div>
+
+            <!-- Data Grid (2 Columns) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-6 sm:gap-10 lg:gap-16 print:gap-12 mb-6 print:mb-5">
+                
+                <!-- Left Column: Farmer Details -->
+                <div>
+                    <h3 class="text-md sm:text-lg font-bold border-b-2 border-green-600 pb-1.5 mb-2 text-green-800 uppercase">Farmer Details</h3>
+                    <table class="w-full text-sm sm:text-base print:text-base">
+                        <tbody>
+                            <tr>
+                                <td class="w-[35%] py-1 font-semibold text-gray-700 align-top pr-2">Name:</td>
+                                <td class="w-[65%] py-1 align-top"><span class="editable block w-full font-medium break-words capitalize" contenteditable="true">Mahendra Singh</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[35%] py-1 font-semibold text-gray-700 align-top pr-2">Village:</td>
+                                <td class="w-[65%] py-1 align-top"><span class="editable block w-full font-medium break-words capitalize" contenteditable="true">chanka</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[35%] py-1 font-semibold text-gray-700 align-top pr-2">Block:</td>
+                                <td class="w-[65%] py-1 align-top"><span class="editable block w-full font-medium break-words capitalize" contenteditable="true">Enter Block</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[35%] py-1 font-semibold text-gray-700 align-top pr-2">District:</td>
+                                <td class="w-[65%] py-1 align-top"><span class="editable block w-full font-medium break-words capitalize" contenteditable="true">Rohtash</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[35%] py-1 font-semibold text-gray-700 align-top pr-2">Mobile:</td>
+                                <td class="w-[65%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">9334615140</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Right Column: Demo Basics -->
+                <div>
+                    <h3 class="text-md sm:text-lg font-bold border-b-2 border-green-600 pb-1.5 mb-2 text-green-800 uppercase">Demo Basics</h3>
+                    <table class="w-full text-sm sm:text-base print:text-base">
+                        <tbody>
+                            <tr>
+                                <td class="w-[45%] py-1 font-semibold text-gray-700 align-top pr-2">Crop:</td>
+                                <td class="w-[55%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">Paddy</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[45%] py-1 font-semibold text-gray-700 align-top pr-2">Demo Type:</td>
+                                <td class="w-[55%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">Combo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[45%] py-1 font-semibold text-gray-700 align-top pr-2">Product Used:</td>
+                                <td class="w-[55%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">Sulton, Superrhiza, Sulfino Gold</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[45%] py-1 font-semibold text-gray-700 align-top pr-2">Area:</td>
+                                <td class="w-[55%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">Not specified</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[45%] py-1 font-semibold text-gray-700 align-top pr-2">DOT:</td>
+                                <td class="w-[55%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">29.07.2025</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[45%] py-1 font-semibold text-gray-700 align-top pr-2">Demonstration:</td>
+                                <td class="w-[55%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">Sulton (Basal dose), Superrhiza (08.2025) sulfino Gold (22.09.2025)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="w-[45%] py-1 font-semibold text-gray-700 align-top pr-2">FSD Date:</td>
+                                <td class="w-[55%] py-1 align-top"><span class="editable block w-full font-medium break-words" contenteditable="true">15.09.2025</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Observations Table (Updated to T1, T2, T3 format) -->
+            <div class="mb-6 print:mb-5">
+                <h3 class="text-md sm:text-lg font-bold border-b-2 border-green-600 pb-1.5 mb-3 text-green-800 uppercase">Observations</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm sm:text-base print:text-base border-collapse border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-2 py-2 text-left text-gray-800 uppercase text-xs sm:text-sm w-1/4">Parameter</th>
+                                <th class="border border-gray-300 px-2 py-2 text-left text-gray-800 uppercase text-xs sm:text-sm w-1/4">T1 (DEMO)</th>
+                                <th class="border border-gray-300 px-2 py-2 text-left text-gray-800 uppercase text-xs sm:text-sm w-1/4">T2 (CONTROL)</th>
+                                <th class="border border-gray-300 px-2 py-2 text-left text-gray-800 uppercase text-xs sm:text-sm w-1/4">T3 (CONTROL)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 px-2 py-2 font-semibold text-gray-700">Root Length</td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">30 cm</span></td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">25.4 cm</span></td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">20.34 cm</span></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 px-2 py-2 font-semibold text-gray-700">Plant Height</td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">83 cm</span></td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">76 cm</span></td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">88 cm</span></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 px-2 py-2 font-semibold text-gray-700">Panicles</td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">35</span></td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">32</span></td>
+                                <td class="border border-gray-300 px-2 py-1.5"><span class="editable w-full block text-center sm:text-left" contenteditable="true">22</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Farmer's Observation -->
+            <div class="mb-4 sm:mb-6 text-gray-800">
+                <p class="text-md sm:text-lg font-bold border-b-2 border-green-600 pb-1.5 mb-2 text-green-800 uppercase">Farmer's Observation</p>
+                <div class="editable-block text-gray-700 text-sm sm:text-base print:text-base min-h-[60px] leading-relaxed bg-gray-50 print:bg-transparent p-3 rounded" contenteditable="true">
+                    Grain filling (Size of grain) also good in T-1 plot. Clear and visible diffrence in T-1 and T-3 plot in terms of plant growth and T3 plot plants turns yellow but T1 & T2 plot plants are Green.
+                </div>
+            </div>
+
+            <!-- Image Banner Section (Moved to Bottom) -->
+            <div class="banner-container image-upload-area w-full h-[60mm] sm:h-[80mm] print:h-[80mm] mt-auto bg-gray-50 flex items-center justify-center cursor-pointer relative overflow-hidden rounded group" onclick="triggerUpload(event, this)">
+                <!-- Upload placeholder -->
+                <div class="upload-placeholder text-center text-gray-500 group-hover:text-blue-600 no-print transition-colors p-4">
+                    <svg class="mx-auto h-8 w-8 sm:h-12 sm:w-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <span class="text-xs sm:text-sm font-medium">Click to upload demonstration photo</span>
+                </div>
+                <!-- Uploaded Image Preview (object-contain ensures no cropping) -->
+                <img src="" class="banner-img hidden w-full h-full object-contain" alt="Demonstration Banner" />
+                <input type="file" class="img-upload hidden" accept="image/*" onchange="previewImage(event)" />
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons (Non-printable) -->
+    <div class="no-print fixed bottom-4 right-4 sm:bottom-8 sm:right-8 flex flex-col gap-2 sm:gap-4 z-50">
+        <button onclick="addReportPage()" class="bg-white border border-green-500 text-green-700 p-3 sm:px-5 sm:py-3 rounded-full shadow-md hover:bg-green-50 flex items-center justify-center gap-2 transition-colors font-medium">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            <span class="hidden sm:inline">Add New Page</span>
+        </button>
+        <button onclick="clearAllForms()" class="bg-white border border-gray-300 text-gray-700 p-3 sm:px-5 sm:py-3 rounded-full shadow-md hover:bg-gray-50 flex items-center justify-center gap-2 transition-colors font-medium">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+            <span class="hidden sm:inline">Clear All Data</span>
+        </button>
+        <button onclick="window.print()" class="bg-blue-600 text-white p-4 sm:px-6 sm:py-4 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center gap-2 transition-colors font-bold sm:text-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+            </svg>
+            <span class="hidden sm:inline">Print A4 Report</span>
+        </button>
+    </div>
+
+    <!-- Custom Modal for Alerts/Confirms -->
+    <div id="custom-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black bg-opacity-50 no-print px-4">
+        <div class="bg-white rounded-lg p-6 max-w-sm w-full shadow-xl">
+            <h3 id="modal-title" class="text-lg font-bold text-gray-900 mb-2">Confirmation</h3>
+            <p id="modal-message" class="text-gray-600 mb-6">Are you sure?</p>
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors font-medium">Cancel</button>
+                <button id="modal-confirm-btn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors font-medium">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Modal Logic
+        let confirmAction = null;
+        
+        function showModal(title, message, confirmText, actionCallback) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            const confirmBtn = document.getElementById('modal-confirm-btn');
+            confirmBtn.innerText = confirmText;
+            
+            confirmAction = actionCallback;
+            
+            // Clean up previous listeners
+            const newConfirmBtn = confirmBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+            
+            newConfirmBtn.addEventListener('click', () => {
+                if (confirmAction) confirmAction();
+                closeModal();
+            });
+            
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+            confirmAction = null;
+        }
+
+        // Trigger file input safely
+        function triggerUpload(event, container) {
+            if(event.target.tagName !== 'INPUT') {
+                container.querySelector('.img-upload').click();
+            }
+        }
+
+        // Handle image upload and preview for a specific page
+        function previewImage(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const container = input.closest('.image-upload-area');
+                    const imgElement = container.querySelector('.banner-img');
+                    const placeholder = container.querySelector('.upload-placeholder');
+                    
+                    imgElement.src = e.target.result;
+                    imgElement.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Add a brand new empty report page based on the last one
+        function addReportPage() {
+            const container = document.getElementById('reports-container');
+            const pages = container.querySelectorAll('.report-page');
+            
+            // Clone the LAST page to act as a template
+            const templatePage = pages[pages.length - 1].cloneNode(true);
+
+            // Clear the image from the cloned page
+            const img = templatePage.querySelector('.banner-img');
+            img.src = "";
+            img.classList.add('hidden');
+            const placeholder = templatePage.querySelector('.upload-placeholder');
+            placeholder.classList.remove('hidden');
+            templatePage.querySelector('.img-upload').value = "";
+
+            // Smart Increment: Find "REPORT 3/26" and increment the 3 to 4
+            const reportNumSpan = templatePage.querySelector('.report-number');
+            if (reportNumSpan) {
+                const text = reportNumSpan.innerText;
+                const match = text.match(/REPORT\s+(\d+)\/(\d+)/i);
+                if (match) {
+                    const nextNum = parseInt(match[1]) + 1;
+                    reportNumSpan.innerText = text.replace(match[1], nextNum);
+                }
+            }
+
+            // Append new page and update delete buttons
+            container.appendChild(templatePage);
+            updateDeleteButtons();
+            
+            // Scroll to new page smoothly
+            templatePage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Remove a specific page
+        function removeReportPage(btn) {
+            const container = document.getElementById('reports-container');
+            if(container.querySelectorAll('.report-page').length > 1) {
+                showModal("Remove Page", "Are you sure you want to remove this report page?", "Remove", () => {
+                    btn.closest('.report-page').remove();
+                    updateDeleteButtons();
+                });
+            }
+        }
+
+        // Show delete buttons only if there is more than 1 page
+        function updateDeleteButtons() {
+            const pages = document.querySelectorAll('.report-page');
+            pages.forEach(page => {
+                const delBtn = page.querySelector('.delete-page-btn');
+                if(pages.length > 1) {
+                    delBtn.classList.remove('hidden');
+                } else {
+                    delBtn.classList.add('hidden');
+                }
+            });
+        }
+
+        // Reset ALL form details across all pages
+        function clearAllForms() {
+            showModal("Clear All Data", "Are you sure you want to clear ALL text data and images on ALL pages?", "Clear Data", () => {
+                const editables = document.querySelectorAll('.editable');
+                editables.forEach(el => el.innerText = "...");
+                
+                const editableBlocks = document.querySelectorAll('.editable-block');
+                editableBlocks.forEach(el => {
+                    el.innerText = "...";
+                });
+
+                // Clear Images
+                const images = document.querySelectorAll('.banner-img');
+                images.forEach(img => {
+                    img.src = "";
+                    img.classList.add('hidden');
+                });
+                const placeholders = document.querySelectorAll('.upload-placeholder');
+                placeholders.forEach(pl => pl.classList.remove('hidden'));
+                
+                const inputs = document.querySelectorAll('.img-upload');
+                inputs.forEach(inp => inp.value = "");
+            });
+        }
+
+        // Update document title for saving before print
+        window.addEventListener('beforeprint', () => {
+            const reportHeader = document.querySelector('.report-title, .report-number');
+            if(reportHeader) {
+                const cleanTitle = reportHeader.innerText.replace(/[\n\r]/g, '').trim().replace(/[^a-zA-Z0-9]/g, '_');
+                document.title = cleanTitle || "Combo_T123_Reports";
+            }
+        });
+
+        // Initialize state for delete buttons
+        updateDeleteButtons();
+    </script>
+</body>
+</html>

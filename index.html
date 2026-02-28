@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S2H Field Demonstration Reports Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6;
+        }
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-white border-b border-gray-200 shadow-sm py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+                <span class="text-blue-600">S2H</span> Field Demonstration Reports
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg sm:text-xl text-gray-500 mx-auto">
+                Central dashboard for generating, editing, and printing A4 agricultural field day reports. Select a template below to get started.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Grid of Application Templates -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card 1: Original STRR Report -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover-lift flex flex-col overflow-hidden">
+                <div class="p-6 sm:p-8 flex-grow">
+                    <div class="w-14 h-14 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3">STRR Report</h2>
+                    <p class="text-gray-600 mb-6">
+                        The original STRR Demonstration format with detailed Field, Crop, and Application Dose tracking.
+                    </p>
+                </div>
+                <div class="px-6 pb-6 pt-2 mt-auto">
+                    <a href="report_builder.html" onclick="handleNav(event)" class="block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-colors shadow-sm">
+                        Open STRR Template
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: CPC Report -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover-lift flex flex-col overflow-hidden">
+                <div class="p-6 sm:p-8 flex-grow">
+                    <div class="w-14 h-14 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3">CPC Report</h2>
+                    <p class="text-gray-600 mb-6">
+                        Standard CPC Field Day format. Includes Farmer Details, Basics, and general observation sections.
+                    </p>
+                </div>
+                <div class="px-6 pb-6 pt-2 mt-auto">
+                    <a href="cpc-report-template.html" onclick="handleNav(event)" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-colors shadow-sm">
+                        Open CPC Template
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3: SN Spot Report -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover-lift flex flex-col overflow-hidden">
+                <div class="p-6 sm:p-8 flex-grow">
+                    <div class="w-14 h-14 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3">SN Spot Report</h2>
+                    <p class="text-gray-600 mb-6">
+                        SN Spot format featuring top-aligned banner images and Demo vs Control Plot comparison tables.
+                    </p>
+                </div>
+                <div class="px-6 pb-6 pt-2 mt-auto">
+                    <a href="sn-spot-report-template.html" onclick="handleNav(event)" class="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3.5 px-4 rounded-xl transition-colors shadow-sm">
+                        Open SN Spot Template
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 4: Combo Report -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover-lift flex flex-col overflow-hidden">
+                <div class="p-6 sm:p-8 flex-grow">
+                    <div class="w-14 h-14 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3">Combo Report</h2>
+                    <p class="text-gray-600 mb-6">
+                        Standard Combo demonstration format designed for multiple product usage like Sulton, Superrhiza, etc.
+                    </p>
+                </div>
+                <div class="px-6 pb-6 pt-2 mt-auto">
+                    <a href="combo-report-template.html" onclick="handleNav(event)" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-colors shadow-sm">
+                        Open Combo Template
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 5: Combo T1/T2/T3 Report -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-md hover-lift flex flex-col overflow-hidden sm:col-span-2 lg:col-span-1">
+                <div class="p-6 sm:p-8 flex-grow">
+                    <div class="w-14 h-14 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-3">Combo T1/T2/T3</h2>
+                    <p class="text-gray-600 mb-6">
+                        Advanced Combo format featuring a specialized 4-column observation table for testing T1, T2, and T3 plots.
+                    </p>
+                </div>
+                <div class="px-6 pb-6 pt-2 mt-auto">
+                    <a href="combo-t123-report-template.html" onclick="handleNav(event)" class="block w-full text-center bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-colors shadow-sm">
+                        Open T1/T2/T3 Template
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 text-center mt-auto">
+        <p class="text-sm">Designed & Developed by The Sparrow Webapps</p>
+        
+    </footer>
+
+    <!-- Safe Navigation Script for Canvas Preview -->
+    <script>
+        function handleNav(e) {
+            // Check if we are running inside an iframe (like the AI Preview environment)
+            if (window.self !== window.top) {
+                e.preventDefault();
+                alert("You are currently in the Web Preview environment!\n\nTo make these buttons work, please save all 6 HTML files into a folder on your actual computer, then double-click 'index.html' to open it normally.");
+            }
+        }
+    </script>
+</body>
+</html>
